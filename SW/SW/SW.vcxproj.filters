@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="수업 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="과제 필터">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="1_CS.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="2_DataType.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="3_Struct.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="4_Operator.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="5_Function.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="6_Pointer.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="7_Reference.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="8_Function.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="9_Array.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="8_1_Function.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="10_Class_Hiding.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="10_Class_Inheritant.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="10_Class_Polymorphism.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="10_Class_Polymorphism2.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="10_Class_Constructor.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="11_DynamicAllocation.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="10_Class_Abstraction.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="12_Static.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="13_Singleton.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="14_DeepCopy.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="15_Function_Ptr.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="16_Functor.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="17_Template.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Player3.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="18_Vector.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Exercise_2.cpp">
+      <Filter>과제 필터</Filter>
+    </ClCompile>
+    <ClCompile Include="Exercise_1.cpp">
+      <Filter>과제 필터</Filter>
+    </ClCompile>
+    <ClCompile Include="19_List.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="20_Iterator.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="21_Map.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="22_Algorithm.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="23_ModernCPP.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="24_Casting.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="25_Shift.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="26_Lambda.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="27_SMartPointer.cpp">
+      <Filter>수업 파일</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player3.h">
+      <Filter>수업 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="MyVector.h">
+      <Filter>과제 필터</Filter>
+    </ClInclude>
+    <ClInclude Include="MyList.h">
+      <Filter>과제 필터</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
