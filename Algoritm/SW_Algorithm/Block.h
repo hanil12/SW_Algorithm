@@ -5,6 +5,8 @@ public:
 	enum BlockType
 	{
 		DISABLE = 0,
+		ABLE,
+		PLAYER
 	};
 
 	Block();
@@ -15,6 +17,8 @@ public:
 
 	void SetSize(Vector v);
 	void SetCenter(Vector v);
+	void SetType(BlockType type) { _type = type; }
+	BlockType GetType() { return _type; }
 
 	Vector Center() { return _rect->_center; }
 	Vector Size() { return _rect->_size; }

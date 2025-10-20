@@ -29,6 +29,32 @@ public:
         return Vector(x - other.x, y - other.y);
     }
 
+    Vector& operator+=(const Vector& other)
+    {
+        x += other.x;
+        y += other.y;
+
+        return *this;
+    }
+
+    Vector& operator-=(const Vector& other)
+    {
+        x -= other.x;
+        y -= other.y;
+
+        return *this;
+    }
+
+    bool operator==(const Vector& other)
+    {
+        return (x == other.x) && (y == other.y);
+    }
+
+    bool operator!=(const Vector& other)
+    {
+        return !this->operator==(other);
+    }
+
 public:
 	float x;
 	float y;

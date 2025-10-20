@@ -11,7 +11,7 @@ public:
 	static HDC _backBuffer;
 
 private:
-	shared_ptr<Maze> _maze;
+	shared_ptr<Scene> _scene;
 
 	HBITMAP _hBit;
 };

@@ -15,6 +15,9 @@
     <Filter Include="Maze">
       <UniqueIdentifier>{c52a6428-f253-4b9d-8c86-c9f4c9ea0c42}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{e816fc6c-29b9-4dd0-955e-f8a547283eb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -44,6 +47,15 @@
     <ClInclude Include="Maze.h">
       <Filter>Maze</Filter>
     </ClInclude>
+    <ClInclude Include="MazePlayer.h">
+      <Filter>Maze</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="MazeScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SW_Algorithm.cpp">
@@ -66,6 +78,15 @@
     </ClCompile>
     <ClCompile Include="Maze.cpp">
       <Filter>Maze</Filter>
+    </ClCompile>
+    <ClCompile Include="MazePlayer.cpp">
+      <Filter>Maze</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="MazeScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

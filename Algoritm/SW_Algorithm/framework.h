@@ -14,6 +14,7 @@
 #include <memory.h>
 #include <tchar.h>
 
+#include <stack>
 #include <vector>
 #include <unordered_map>
 #include <map>
@@ -27,5 +28,8 @@ using namespace std;
 
 #include "Block.h"
 #include "Maze.h"
+#include "MazePlayer.h"
+
+#include "Scene.h"
 
 #include "Program.h"

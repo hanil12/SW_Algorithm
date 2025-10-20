@@ -132,7 +132,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_CREATE:
     {
         program = make_shared<Program>(hWnd);
-        SetTimer(hWnd, 1,1,nullptr);
+        SetTimer(hWnd, 1,1,nullptr); // 0.001
         break;
     }
 

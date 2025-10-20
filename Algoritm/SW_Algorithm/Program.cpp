@@ -1,11 +1,13 @@
 #include "framework.h"
 #include "program.h"
 
+#include "MazeScene.h"
+
 HDC Program::_backBuffer = nullptr;
 
 Program::Program(HWND hWnd)
 {
-	_maze = make_shared<Maze>();
+	_scene = make_shared<MazeScene>();
 
 	HDC hdc = GetDC(hWnd);
 	_backBuffer = CreateCompatibleDC(hdc);
@@ -19,14 +21,14 @@ Program::~Program()
 
 void Program::Update()
 {
-	_maze->Update();
+	_scene->Update();
 }
 
 void Program::Render(HDC hdc)
 {
 	PatBlt(_backBuffer, 0,0,1200,800,BLACKNESS); // backbuffer 지우기
 
-	_maze->Render(_backBuffer); // backbuffer에 그림 그리기
+	_scene->Render(_backBuffer); // backbuffer에 그림 그리기
 
 	// backbuffer의 그림을 복사해오기
 	BitBlt(
