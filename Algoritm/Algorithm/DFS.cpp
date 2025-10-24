@@ -12,6 +12,7 @@ using namespace std;
 
 // DFS(Deep First Search)
 // 재귀호출 <=> 반복문
+// 닫힌 계 찾기
 
 vector<vector<bool>> adjacent; // 인접 행렬
 vector<bool> visited;

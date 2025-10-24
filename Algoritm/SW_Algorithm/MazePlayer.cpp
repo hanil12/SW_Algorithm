@@ -7,7 +7,7 @@ MazePlayer::MazePlayer(shared_ptr<Maze> maze)
 	_maze.lock()->SetBlock(Vector(1,1), Block::PLAYER);
 	_pos = _maze.lock()->StartPos();
 
-	RightHand();
+	BFS_Method();
 }
 
 MazePlayer::~MazePlayer()
@@ -21,7 +21,7 @@ void MazePlayer::Update()
 		return ;
 	}
 
-	_time += 0.1f;
+	_time += 0.5f;
 
 	if (_time > 1.0f)
 	{
@@ -49,14 +49,6 @@ void MazePlayer::RightHand()
 	Vector pos = maze->StartPos();
 	Vector endPos = maze->EndPos();
 	_dir = Dir::UP;
-
-	Vector frontPos[4] =
-	{
-		Vector {0, -1}, // UP
-		Vector {-1, 0}, // LEFT
-		Vector {0, 1}, // DOWN
-		Vector {1, 0}, // RIGHT
-	};
 
 	// 우수법으로 길을 찾으면서 _path에 추가
 	while (true)
@@ -117,10 +109,104 @@ void MazePlayer::RightHand()
 	std::reverse(_path.begin(), _path.end());
 }
 
+void MazePlayer::DFS_Method()
+{
+	shared_ptr<Maze> maze = _maze.lock();
+	Vector start = maze->StartPos();
+	vector<vector<bool>> visited; // visited[1][1] == true
+	visited = vector<vector<bool>>(MAX_Y, vector<bool>(MAX_X, false));
+
+	DFS(start, visited, maze);
+	_path.push_back(maze->EndPos());
+}
+
+void MazePlayer::BFS_Method()
+{
+	shared_ptr<Maze> maze = _maze.lock();
+	Vector start = maze->StartPos();
+	Vector end = maze->EndPos();
+
+	vector<vector<bool>> visited = vector<vector<bool>>(MAX_Y, vector<bool>(MAX_X, false));
+	queue<Vector> q;
+	vector<vector<Vector>> parent = vector<vector<Vector>>(MAX_Y, vector<Vector>(MAX_X, Vector(-1,-1))); // [2][1] ... [1][1]
+
+	visited[start.y][start.x] = true;
+	q.push(start);
+	parent[start.y][start.x] = start;
+
+	while (true)
+	{
+		if(q.empty())
+			break;
+
+		Vector here = q.front();
+		q.pop();
+
+		if(here == end)
+			break;
+
+		for (int i = 0; i < 4; i++)
+		{
+			Vector there = here + frontPos[i];
+			// 인접체크
+			if(Cango(there) == false)
+				continue;
+
+			// 방문체크
+			if(visited[there.y][there.x] == true)
+				continue;
+
+			visited[there.y][there.x] = true;
+			q.push(there);
+			parent[there.y][there.x] = here;
+		}
+	}
+
+	Vector pos = end;
+	while (true)
+	{
+		if(pos == start)
+			break;
+
+		_path.push_back(pos);
+		pos = parent[pos.y][pos.x];
+	}
+
+	_path.push_back(start);
+	std::reverse(_path.begin(), _path.end());
+}
+
 bool MazePlayer::Cango(Vector pos)
 {
 	Block::BlockType type = _maze.lock()->GetBlockType(pos);
 	if(type == Block::BlockType::DISABLE)
 		return false;
 	return true;
+}
+
+void MazePlayer::DFS(Vector here, vector<vector<bool>>& visited, shared_ptr<Maze> maze)
+{
+	if(maze->GetBlockType(here) == Block::BlockType::DISABLE)
+		return;
+
+	if (here == maze->EndPos())
+		return;
+
+	visited[here.y][here.x] = true;
+
+	for (int i = 0; i < 4; i++)
+	{
+		Vector there = here + frontPos[i];
+
+		// 인접해있고, 갈 수 있는 길인지
+		if(Cango(there) == false)
+			continue;
+
+		// 방문되었는지
+		if(visited[there.y][there.x] == true)
+			continue;
+
+		_path.push_back(there);
+		DFS(there, visited, maze);
+	}
 }
