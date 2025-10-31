@@ -8,10 +8,12 @@ Block::Block()
 	_pens.push_back(CreatePen(1,2,RGB(255,0,0)));
 	_pens.push_back(CreatePen(1,2,RGB(0,255,0)));
 	_pens.push_back(CreatePen(1,2,RGB(0,0,255)));
+	_pens.push_back(CreatePen(1,2,RGB(55,55,55)));
 
 	_brushes.push_back(CreateSolidBrush(RGB(255,0,0)));
 	_brushes.push_back(CreateSolidBrush(RGB(0,255,0)));
 	_brushes.push_back(CreateSolidBrush(RGB(0,255,255)));
+	_brushes.push_back(CreateSolidBrush(RGB(55,55,55)));
 }
 
 Block::~Block()

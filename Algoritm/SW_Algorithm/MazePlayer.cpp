@@ -7,7 +7,7 @@ MazePlayer::MazePlayer(shared_ptr<Maze> maze)
 	_maze.lock()->SetBlock(Vector(1,1), Block::PLAYER);
 	_pos = _maze.lock()->StartPos();
 
-	BFS_Method();
+	AStar({_maze.lock()->StartPos(), 0,0,0}, { _maze.lock()->EndPos(), 0,0,0 });
 }
 
 MazePlayer::~MazePlayer()
@@ -145,7 +145,7 @@ void MazePlayer::BFS_Method()
 		if(here == end)
 			break;
 
-		for (int i = 0; i < 4; i++)
+		for (int i = 0; i < 8; i++)
 		{
 			Vector there = here + frontPos[i];
 			// 인접체크
@@ -159,6 +159,8 @@ void MazePlayer::BFS_Method()
 			visited[there.y][there.x] = true;
 			q.push(there);
 			parent[there.y][there.x] = here;
+
+			maze->SetBlock(there, Block::BlockType::FOOT_PRINT);
 		}
 	}
 
@@ -166,6 +168,159 @@ void MazePlayer::BFS_Method()
 	while (true)
 	{
 		if(pos == start)
+			break;
+
+		_path.push_back(pos);
+		pos = parent[pos.y][pos.x];
+	}
+
+	_path.push_back(start);
+	std::reverse(_path.begin(), _path.end());
+}
+
+void MazePlayer::Djikstra(Vertex_Djikstra startV)
+{
+	priority_queue<Vertex_Djikstra, vector<Vertex_Djikstra>, greater<Vertex_Djikstra>> pq;
+	vector<vector<Vector>> parent = vector<vector<Vector>>(MAX_Y, vector<Vector>(MAX_X, Vector(-1, -1))); // [2][1] ... [1][1]
+	vector<vector<int>> best = vector<vector<int>>(MAX_Y, vector<int>(MAX_X, INT_MAX));
+
+	Vector start = startV.v;
+	pq.push(startV);
+	best[start.y][start.x] = 0;
+	parent[start.y][start.x] = start;
+
+	while (true)
+	{
+		if(pq.empty())
+			break;
+
+		Vertex_Djikstra hereV = pq.top();
+		Vector here = hereV.v;
+		pq.pop();
+
+		if(here == _maze.lock()->EndPos())
+			break;
+
+		// 이미 발견된 곳의 best가 더 좋으면 다음
+		if(best[here.y][here.x] < hereV.cost)
+			continue;
+
+		for (int i = 0; i < 8; i++)
+		{
+			Vector there = here + frontPos[i];
+
+			// 인접한지
+			if(Cango(there) == false)
+				continue;
+
+			int newCost = 0;
+			if (i < 4)
+			{
+				newCost = best[here.y][here.x] + 10; // 상하좌우
+			}
+			else
+			{
+				newCost = best[here.y][here.x] + 14; // 대각
+			}
+		
+			// 새로찾은 가중치가 전에 있던 거보다 크면... continue;
+			if(newCost >= best[there.y][there.x])
+				continue;
+
+			Vertex_Djikstra thereV = {there, newCost};
+			pq.push(thereV);
+			best[there.y][there.x] = newCost;
+			parent[there.y][there.x] = here;
+
+			_maze.lock()->SetBlock(there, Block::BlockType::FOOT_PRINT);
+		}
+	}
+
+	Vector pos = _maze.lock()->EndPos();
+	while (true)
+	{
+		if (pos == start)
+			break;
+
+		_path.push_back(pos);
+		pos = parent[pos.y][pos.x];
+	}
+
+	_path.push_back(start);
+	std::reverse(_path.begin(), _path.end());
+}
+
+void MazePlayer::AStar(Vertex startV, Vertex endV)
+{
+	priority_queue<Vertex, vector<Vertex>, greater<Vertex>> pq;
+	vector<vector<Vector>> parent = vector<vector<Vector>>(MAX_Y, vector<Vector>(MAX_X, Vector(-1, -1))); // [2][1] ... [1][1]
+	vector<vector<int>> best = vector<vector<int>>(MAX_Y, vector<int>(MAX_X, INT_MAX));
+
+	startV.g = 0;
+	startV.h = Vector::MahattanDistance(startV.v, endV.v) * 10;
+	startV.f = startV.g + startV.h;
+
+	Vector start = startV.v;
+	pq.push(startV);
+	best[start.y][start.x] = startV.f;
+	parent[start.y][start.x] = start;
+
+	while (true)
+	{
+		if (pq.empty())
+			break;
+
+		Vertex hereV = pq.top();
+		Vector here = hereV.v;
+		pq.pop();
+
+		if (here == endV.v)
+			break;
+
+		// 이미 발견된 곳의 best가 더 좋으면 다음
+		if (best[here.y][here.x] < hereV.f)
+			continue;
+
+		for (int i = 0; i < 8; i++)
+		{
+			Vector there = here + frontPos[i];
+
+			// 인접한지
+			if (Cango(there) == false)
+				continue;
+
+			int newG = 0;
+			int newH = 0;
+			int newF = 0;
+			if (i < 4)
+			{
+				newG = hereV.g + 10; // 상하좌우
+			}
+			else
+			{
+				newG = hereV.g + 14; // 대각
+			}
+
+			newH = Vector::MahattanDistance(there, endV.v) * 10;
+			newF = newG + newH;
+
+			// 새로찾은 가중치가 전에 있던 거보다 크면... continue;
+			if (newF >= best[there.y][there.x])
+				continue;
+
+			Vertex thereV = {there, newG, newH, newF};
+			pq.push(thereV);
+			best[there.y][there.x] = newF;
+			parent[there.y][there.x] = here;
+
+			_maze.lock()->SetBlock(there, Block::BlockType::FOOT_PRINT);
+		}
+	}
+
+	Vector pos = _maze.lock()->EndPos();
+	while (true)
+	{
+		if (pos == start)
 			break;
 
 		_path.push_back(pos);

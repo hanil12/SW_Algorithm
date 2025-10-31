@@ -55,6 +55,11 @@ public:
         return !this->operator==(other);
     }
 
+    static int MahattanDistance(const Vector& v1, const Vector& v2)
+    {
+        return abs(v2.x - v1.x) + abs(v2.y - v1.y);
+    }
+
 public:
 	float x;
 	float y;
